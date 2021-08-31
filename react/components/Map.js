@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import markerIcon from '../assets/icons/marker.svg'
 import bestMarkerIcon from '../assets/icons/best_marker.svg'
+import tp_markerIcon from '../assets/icons/tp_marker.svg'
+import tp_bestMarkerIcon from '../assets/icons/tp_best_marker.svg'
 import personPin from '../assets/icons/person_pin.svg'
 import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
 import searchingMarkerIcon from '../assets/icons/searching_marker_icon.svg'
@@ -384,6 +386,8 @@ class Map extends Component {
       selectedPickupPoint,
     } = this.props
 
+    // console.log('%c PUP ', 'background: red; color: white', pickupPoints);
+
     const filteredExternalPickupPoints =
       externalPickupPoints &&
       externalPickupPoints.filter(
@@ -496,15 +500,31 @@ class Map extends Component {
           )
         })
         .forEach((pickupPoint, index) => {
+
+          // console.log('%c pickupPoint ', 'background: white; color: black', pickupPoint);
+
           const location = this.getLocation(
             pickupPoint.pickupStoreInfo.address.geoCoordinates
           )
-          const markerIconImage =
-            index < BEST_PICKUPS_AMOUNT &&
+
+          const shouldRenderBestMarker = index < BEST_PICKUPS_AMOUNT &&
             bestPickupOptions.length > BEST_PICKUPS_AMOUNT &&
             this.markers.length < BEST_PICKUPS_AMOUNT
+
+          const isFirstParty = pickupPoint.pickupStoreInfo.additionalInfo === 'first-party'
+
+          let markerIconImage
+
+          if (isFirstParty) {
+            markerIconImage = shouldRenderBestMarker
               ? bestMarkerIcon
               : markerIcon
+          } else {
+            markerIconImage = shouldRenderBestMarker
+              ? tp_bestMarkerIcon
+              : tp_markerIcon
+          }
+
           const isScaledMarker =
             selectedPickupPoint && selectedPickupPoint.id === pickupPoint.id
 

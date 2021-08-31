@@ -4,15 +4,17 @@ import { injectIntl, intlShape } from 'react-intl'
 import { formatCurrency, formatNumber } from '../utils/Currency'
 import { formatDistance } from '../utils/Distance'
 import { translate } from '../utils/i18nUtils'
-import PinIcon from '../assets/components/PinIcon'
 import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstimate'
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
 import styles from './PickupPoint.css'
 import { injectState } from '../modalStateContext'
+import PinIcon from '../assets/components/PinIcon'
+import TP_PinIcon from '../assets/components/TP_PinIcon'
 import UnavailableMarker from '../assets/components/UnavailableMarker'
 import SearchMarkerIcon from '../assets/components/SearchMarkerIcon'
 import BestMarkerIcon from '../assets/components/BestMarkerIcon'
+import TP_BestMarkerIcon from '../assets/components/TP_BestMarkerIcon'
 import { getCleanId } from '../utils/StateUtils'
 
 const MAX_KILOMETERS = 1000
@@ -93,6 +95,19 @@ class PickupPointInfo extends Component {
       isSelectedBestPickupPoint,
     } = this.props
 
+    const isFirstParty = pickupPoint.pickupStoreInfo.additionalInfo === 'first-party'
+
+    let bestMarkerIcon
+    let markerIcon
+
+    if (isFirstParty) {
+      bestMarkerIcon = <BestMarkerIcon />
+      markerIcon = <PinIcon />
+    } else {
+      bestMarkerIcon = <TP_BestMarkerIcon />
+      markerIcon = <TP_PinIcon />
+    }
+
     const { info, unavailableItemsAmount, distance } = this.state
 
     const pickupId = getCleanId(pickupPoint.id)
@@ -133,10 +148,10 @@ class PickupPointInfo extends Component {
             } pkpmodal-pickup-point-marker`}>
             {sholdShowUnavailableMarker && <UnavailableMarker />}
             {sholdShowSearchMarker && <SearchMarkerIcon />}
-            {isBestPickupPointAndAvailable && <BestMarkerIcon />}
+            {isBestPickupPointAndAvailable && bestMarkerIcon}
             {!sholdShowSearchMarker &&
               !sholdShowUnavailableMarker &&
-              !isBestPickupPointAndAvailable && <PinIcon />}
+              !isBestPickupPointAndAvailable && markerIcon}
             {distance && (
               <p
                 className={`${styles.pickupPointDistance} pkpmodal-pickup-point-distance`}>
