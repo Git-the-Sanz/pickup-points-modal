@@ -11,6 +11,7 @@ import { getPickupGeolocationString } from '../utils/GetString'
 import { injectState } from '../modalStateContext'
 import { LIST, BEST_PICKUPS_AMOUNT, HIDE_MAP } from '../constants'
 import { getPickupPointGeolocations } from '../utils/pickupUtils'
+import { getMarker } from '../fetchers'
 
 const BIG_MARKER_WIDTH = 38
 const BIG_MARKER_HEIGHT = 49
@@ -38,6 +39,8 @@ class Map extends Component {
         zIndex: 0,
       },
     }
+
+    console.log(getMarker('pupMap_thirdParty_bestMarker.svg'))
   }
 
   shouldComponentUpdate(prevProps) {
