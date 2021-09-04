@@ -116,6 +116,16 @@ class PickupPointInfo extends Component {
     const shouldShowAllUnavailable =
       unavailableItemsAmount === items.length && !sholdShowSearchMarker
 
+    const customPickupPoint= pickupPoint.pickupStoreInfo.additionalInfo
+
+    let customMarker
+
+    if (customPickupPoint) {
+      customMarker = `/arquivos/pup_marker_${customPickupPoint}.svg`
+    } else {
+      customMarker = null
+    }
+
     return (
       <div
         className={`${styles.pickupPoint} pkpmodal-pickup-point`}
@@ -133,10 +143,10 @@ class PickupPointInfo extends Component {
             } pkpmodal-pickup-point-marker`}>
             {sholdShowUnavailableMarker && <UnavailableMarker />}
             {sholdShowSearchMarker && <SearchMarkerIcon />}
-            {isBestPickupPointAndAvailable && <BestMarkerIcon />}
+            {isBestPickupPointAndAvailable && <PinIcon custom={customMarker}/>}
             {!sholdShowSearchMarker &&
               !sholdShowUnavailableMarker &&
-              !isBestPickupPointAndAvailable && <PinIcon />}
+              !isBestPickupPointAndAvailable && <PinIcon custom={customMarker}/>}
             {distance && (
               <p
                 className={`${styles.pickupPointDistance} pkpmodal-pickup-point-distance`}>

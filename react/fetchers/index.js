@@ -93,35 +93,3 @@ export function updateShippingData(
     window.vtexjs.checkout.sendAttachment('shippingData', shippingData)
   )
 }
-
-export function getMarkers() {
-  function FPM() {
-    return axios({ url: '/arquivos/pupMap_firstParty_marker.svg' })
-  }
-
-  function FPBM() {
-    return axios({ url: '/arquivos/pupMap_firstParty_bestMarker.svg' })
-  }
-
-  function TPM() {
-    return axios({ url: '/arquivos/pupMap_thirdParty_marker.svg' })
-  }
-
-  function TPBM() {
-    return axios({ url: '/arquivos/pupMap_thirdParty_bestMarker.svg' })
-  }
-
-  console.log(TPBM())
-
-  /* Promise.allSettled([FPM(), FPBM(), TPM(), TPBM()])
-    .then(function(results) {
-      console.log('%c RESULTS ', 'background: red; color: white', results)
-    })
-    .catch(error => {
-      console.log(error)
-    }) */
-}
-
-export function getMarker(marker) {
-  return axios({ url: `/arquivos/${marker}` }) 
-}

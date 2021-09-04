@@ -1,7 +1,10 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-class PinIcon extends PureComponent {
-  render() {
+const PinIcon = ({ custom = null }) => {
+
+  if (custom) {
+    return <img src={custom} />
+  } else {
     return (
       <svg
         className="pkpmodal-pickup-point-marker-image"
@@ -17,8 +20,10 @@ class PinIcon extends PureComponent {
         />
         <circle cx="12.3386" cy="12.3387" r="3.98387" fill="white" />
       </svg>
-    )
+    );
   }
-}
 
-export default PinIcon
+
+};
+
+export default PinIcon;

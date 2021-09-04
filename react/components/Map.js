@@ -11,7 +11,6 @@ import { getPickupGeolocationString } from '../utils/GetString'
 import { injectState } from '../modalStateContext'
 import { LIST, BEST_PICKUPS_AMOUNT, HIDE_MAP } from '../constants'
 import { getPickupPointGeolocations } from '../utils/pickupUtils'
-import { getMarker } from '../fetchers'
 
 const BIG_MARKER_WIDTH = 38
 const BIG_MARKER_HEIGHT = 49
@@ -40,7 +39,6 @@ class Map extends Component {
       },
     }
 
-    console.log(getMarker('pupMap_thirdParty_bestMarker.svg'))
   }
 
   shouldComponentUpdate(prevProps) {
@@ -502,12 +500,17 @@ class Map extends Component {
           const location = this.getLocation(
             pickupPoint.pickupStoreInfo.address.geoCoordinates
           )
-          const markerIconImage =
-            index < BEST_PICKUPS_AMOUNT &&
-            bestPickupOptions.length > BEST_PICKUPS_AMOUNT &&
-            this.markers.length < BEST_PICKUPS_AMOUNT
-              ? bestMarkerIcon
-              : markerIcon
+
+          const customPickupPoint= pickupPoint.pickupStoreInfo.additionalInfo
+
+          let markerIconImage
+
+          if (customPickupPoint) {
+            markerIconImage = `/arquivos/pup_marker_${customPickupPoint}.svg`
+          } else {
+            markerIconImage = markerIcon
+          }
+
           const isScaledMarker =
             selectedPickupPoint && selectedPickupPoint.id === pickupPoint.id
 
