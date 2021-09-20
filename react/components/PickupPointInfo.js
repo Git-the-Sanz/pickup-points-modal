@@ -121,7 +121,7 @@ class PickupPointInfo extends Component {
     let customMarker
 
     if (customPickupPoint) {
-      customMarker = `/arquivos/pup_marker_${customPickupPoint}.svg`
+      customMarker = `/arquivos/pup_marker_${customPickupPoint}.png`
     } else {
       customMarker = null
     }

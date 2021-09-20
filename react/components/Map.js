@@ -506,7 +506,7 @@ class Map extends Component {
           let markerIconImage
 
           if (customPickupPoint) {
-            markerIconImage = `/arquivos/pup_marker_${customPickupPoint}.svg`
+            markerIconImage = `/arquivos/pup_marker_${customPickupPoint}.png`
           } else {
             markerIconImage = markerIcon
           }

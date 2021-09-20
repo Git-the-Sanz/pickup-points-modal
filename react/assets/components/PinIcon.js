@@ -3,7 +3,7 @@ import React from 'react'
 const PinIcon = ({ custom = null }) => {
 
   if (custom) {
-    return <img src={custom} />
+    return <img style={{width: '25px', height: '31px'}} src={custom} />
   } else {
     return (
       <svg
