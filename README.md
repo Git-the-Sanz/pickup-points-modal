@@ -5,7 +5,7 @@
 ## How this works
 
 - Go to `/admin/pickup-points/` and fill the **Additional information** field with an identifier string. For i.e `arcaplanet` (case-sensitive)
-- Upload your SVG icons to `CMS -> Layout -> File manager` with the following format: **pup_marker_`identifier`.svg**
+- Upload your PNG icons to `CMS -> Layout -> File manager` with the following format: **pup_marker_`identifier`.png**
 
 ### Keep in mind
 
